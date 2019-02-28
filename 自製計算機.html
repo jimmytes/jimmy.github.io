@@ -1,0 +1,140 @@
+<html>
+    <script>
+        var x;
+        var y=0;
+        var z=0;
+        var click=0;
+    function num(number){
+        if (document.getElementById("box").value==null) {
+            document.getElementById("box").value = number;
+        }
+        else {
+        document.getElementById("box").value += number;
+         }
+        }
+        function CE(){
+            document.getElementById("box").value = "";
+            x=null;
+            y=0;
+            z=0;
+            click=0;
+        }
+        function back(){
+            txt = document.getElementById('box');
+            txt.value = txt.value.substring(0,txt.value.length - 1);//取得顯示框內的字串從最左也就是第0位開始算,右邊結束長度-1
+        }
+        function positiveandnegative(){
+            document.getElementById("box").value=parseFloat(0)-parseFloat(document.getElementById("box").value);//正負號運算EX:現在的值是2  0-2= -2 在按一次時現在的值是-2 0-(-2) = 2 即完成正負功能
+            if(click==0){
+            nowvalue=document.getElementById("box").value;
+            }
+            if(click==1){
+            nextvalue=document.getElementById("box").value;
+            }
+        }
+        function sqrt(){
+            document.getElementById("box").value=Math.sqrt(document.getElementById("box").value);//sqrt為開根號的運算
+        }
+        function operation(ope){
+            click=0;
+            equal();
+            if(click==1&&y==0){
+            nowvalue=document.getElementById("box").value;//儲存了現在的值
+            //alert(nowvalue+"nowvalue");
+            }
+            x=ope;                                        //儲存了現在的運算符號
+            document.getElementById("box").value = "";    //清空顯示框
+        }
+        function equal(){
+            if(click==1){
+            nextvalue=document.getElementById("box").value;
+            //alert(nextvalue+"nextvalue");
+            if(nextvalue<0){
+              z=1;
+             }
+            }
+            click++;
+            //alert(click);
+            if(click<3&&z==0){
+          switch(x){
+              case '+':
+              document.getElementById("box").value=parseFloat(nowvalue)+parseFloat(document.getElementById("box").value);
+              break;
+              case '-':
+              document.getElementById("box").value=parseFloat(nowvalue)-parseFloat(document.getElementById("box").value);
+              break;
+              case '*':
+              document.getElementById("box").value=parseFloat(nowvalue)*parseFloat(document.getElementById("box").value);
+              break;
+              case '/':
+              document.getElementById("box").value=parseFloat(nowvalue)/parseFloat(document.getElementById("box").value);
+              break;
+              }
+             }
+
+             if(click<3&&z==1){
+                //alert(nowvalue);
+                //alert(nextvalue);
+          switch(x){
+              case '+':
+              document.getElementById("box").value=parseFloat(nowvalue)+parseFloat(nextvalue);
+              break;
+              case '-':
+              document.getElementById("box").value=parseFloat(nextvalue)-parseFloat(document.getElementById("box").value);
+              break;
+              case '*':
+              document.getElementById("box").value=parseFloat(nextvalue)*parseFloat(document.getElementById("box").value);
+              break;
+              case '/':
+              document.getElementById("box").value=parseFloat(nextvalue)/parseFloat(document.getElementById("box").value);
+              break;
+              }
+             }
+             //alert(click+"click");
+             if(click>1){
+            nowvalue=document.getElementById("box").value;//負責儲存第一次計算完後的結果
+            //alert(nowvalue+"nowvalue1");
+            y=1;
+            }
+
+             if(click>2){
+          switch(x){
+              case '+':
+              document.getElementById("box").value=parseFloat(nextvalue)+parseFloat(document.getElementById("box").value);
+              nowvalue=document.getElementById("box").value;
+              y=1;
+              break;
+              case '-':
+              document.getElementById("box").value=parseFloat(document.getElementById("box").value)-parseFloat(nextvalue);
+              nowvalue=document.getElementById("box").value;
+              y=1;
+              break;
+              case '*':
+              document.getElementById("box").value=parseFloat(document.getElementById("box").value)*parseFloat(nextvalue);
+              nowvalue=document.getElementById("box").value;
+              y=1;
+              break;
+              case '/':
+              document.getElementById("box").value=parseFloat(document.getElementById("box").value)/parseFloat(nextvalue);
+              nowvalue=document.getElementById("box").value;
+              y=1;
+              break;
+             }
+            }
+           }
+    </script>
+    <style>
+    body{
+        background-color:black;
+    }
+    </style>
+    
+<table align=center border=1>
+    <tr align=center> <td colspan="5"><input id="box" type="text" style="width:520px;height:80px;font-size:50px;"/> </td> </tr>
+    <tr align=center> <td><button onclick="num(7)" style="width:100px;height:100px;font-size:50px;">7</button></td> <td><button onclick="num(8)" style="width:100px;height:100px;font-size:50px;">8</button></td> <td><button onclick="num(9)" style="width:100px;height:100px;font-size:50px;">9</button></td> <td><button onclick="operation('+')" style="width:100px;height:100px;font-size:50px;">+</button></td> <td><button onclick="sqrt()" style="width:100px;height:100px;font-size:50px;">√</button></td> </tr>
+    <tr align=center> <td><button onclick="num(4)" style="width:100px;height:100px;font-size:50px;">4</button></td> <td><button onclick="num(5)" style="width:100px;height:100px;font-size:50px;">5</button></td> <td><button onclick="num(6)" style="width:100px;height:100px;font-size:50px;">6</button></td> <td><button onclick="operation('-')" style="width:100px;height:100px;font-size:50px;">-</button></td> <td><button onclick="positiveandnegative()" style="width:100px;height:100px;font-size:50px;">+/-</button></td></tr>
+    <tr align=center> <td><button onclick="num(1)" style="width:100px;height:100px;font-size:50px;">1</button></td> <td><button onclick="num(2)" style="width:100px;height:100px;font-size:50px;">2</button></td> <td><button onclick="num(3)" style="width:100px;height:100px;font-size:50px;">3</button></td> <td><button onclick="operation('*')" style="width:100px;height:100px;font-size:50px;">x</button></td> <td rowspan="3"><button onclick="equal()" style="width:100px;height:310px;font-size:50px;">=</button> </td></tr>
+    <tr align=center> <td colspan="2"><button onclick="num(0)" style="width:205px;height:100px;font-size:50px;">0</button></td> <td> <button onclick="num('.')" style="width:100px;height:100px;font-size:50px;">.</button></td> <td><button onclick="operation('/')" style="width:100px;height:100px;font-size:50px;">÷</button></td> </tr>
+    <tr align=center> <td colspan="3"><button onclick="CE()" style="width:310px;height:100px;font-size:50px;">CE</button></td><td><button onclick="back()" style="width:100px;height:100px;font-size:50px;">←</button></td></tr>
+</table>
+</html>
